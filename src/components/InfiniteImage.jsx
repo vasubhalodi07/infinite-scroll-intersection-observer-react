@@ -9,26 +9,24 @@ const InfiniteImage = () => {
   const imageContainerRef = useRef(null);
 
   useEffect(() => {
-    console.log("only api called useEffect called");
     if (hasMore) {
       dispatch(fetchImage(offset));
     }
-  }, [offset]);
+  }, [dispatch, offset, hasMore]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleInfiniteScrollbar);
+    return () => window.removeEventListener("scroll", handleInfiniteScrollbar);
+  }, []);
 
   const handleInfiniteScrollbar = async () => {
     try {
-      // console.log(
-      //   "window Height: " +
-      //     window.innerHeight +
-      //     " scrollTop:" +
-      //     document.documentElement.scrollTop +
-      //     " scroll height: " +
-      //     document.documentElement.scrollHeight
-      // );
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 >=
-        document.documentElement.scrollHeight
+          document.documentElement.scrollHeight &&
+        hasMore
       ) {
+        console.log(offset);
         dispatch(changeOffset());
         setLoading(false);
       }
@@ -36,30 +34,6 @@ const InfiniteImage = () => {
       console.log(err);
     }
   };
-
-  const checkScrollbar = () => {
-    const windowHeight = window.innerHeight;
-    const imageContainer = imageContainerRef.current;
-    if (imageContainer) {
-      const imageHeight = imageContainer.clientHeight;
-      console.log(imageHeight);
-      console.log(windowHeight);
-      console.log(imageHeight < windowHeight);
-      if (imageHeight < windowHeight && hasMore) {
-        dispatch(changeOffset());
-      }
-    }
-  };
-
-  useEffect(() => {
-    console.log("check scrollbar useEffect called");
-    checkScrollbar();
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleInfiniteScrollbar);
-    return () => window.addEventListener("scroll", handleInfiniteScrollbar);
-  }, []);
 
   return (
     <>

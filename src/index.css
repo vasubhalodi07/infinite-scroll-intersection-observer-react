@@ -14,10 +14,6 @@
   gap: 20px;
 }
 
-.height {
-  min-height: 100vh;
-}
-
 .image-details {
   padding: 20px;
   background-color: whitesmoke;
