@@ -19,7 +19,11 @@ export const fetchImage = createAsyncThunk("image/fetch", async (offset) => {
 const imageSlice = createSlice({
   name: "image",
   initialState: imageState,
-  reducers: {},
+  reducers: {
+    changeOffset: (state) => {
+      state.offset = state.offset + 20;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchImage.pending, (state) => {
@@ -38,7 +42,6 @@ const imageSlice = createSlice({
         } else {
           state.image = [...state.image, ...action.payload.photos];
         }
-        state.offset = state.offset + 20;
       })
       .addCase(fetchImage.rejected, (state, action) => {
         state.loading = false;
@@ -49,3 +52,4 @@ const imageSlice = createSlice({
 });
 
 export default imageSlice.reducer;
+export const { changeOffset } = imageSlice.actions;
