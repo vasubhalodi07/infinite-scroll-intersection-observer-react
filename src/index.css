@@ -5,7 +5,6 @@
 
 .fetch-image {
   padding: 20px 20px 0px 20px;
-  background-color: lightsteelblue;
 }
 
 .image-div {
@@ -41,4 +40,47 @@
 .image-details img {
   width: 300px;
   height: 300px;
+}
+
+.loader {
+  font-size: 30px;
+  font-weight: 600;
+  margin: 20px auto;
+  width: max-content;
+  position: relative;
+  display: flex;
+}
+
+.loader_text {
+  margin-left: 10px;
+}
+
+.spin::before {
+  animation: 1.5s linear infinite spinner;
+  animation-play-state: inherit;
+  border: solid 5px #cfd0d1;
+  border-bottom-color: #1c87c9;
+  border-radius: 50%;
+  content: "";
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  /* top: 10%;
+    left: 10%; */
+  will-change: transform;
+}
+
+@keyframes spinner {
+  0% {
+    transform: translate3d(-100%, 0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0) rotate(360deg);
+  }
+}
+
+.record {
+  font-size: 25px;
+  text-align: center;
+  padding: 10px;
 }

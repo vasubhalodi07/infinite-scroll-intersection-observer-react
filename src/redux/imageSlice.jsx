@@ -42,6 +42,7 @@ const imageSlice = createSlice({
         } else {
           state.image = [...state.image, ...action.payload.photos];
         }
+        state.offset += 20;
       })
       .addCase(fetchImage.rejected, (state, action) => {
         state.loading = false;

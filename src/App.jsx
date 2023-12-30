@@ -1,9 +1,9 @@
-import InfiniteImage from "./components/InfiniteImage";
+import Image from "./components/Image";
 
 const App = () => {
   return (
     <div>
-      <InfiniteImage />
+      <Image />
     </div>
   );
 };
