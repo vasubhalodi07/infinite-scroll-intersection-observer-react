@@ -4,7 +4,7 @@ This project makes scrolling endless in a React.js app by using Intersection Obs
 
 ## Live Project
 
-Check out the live project deployed at [Your Deployed URL](#).
+Check out the live project deployed at [https://infinite-scroll-intersection-observer-react.vercel.app/](https://infinite-scroll-intersection-observer-react.vercel.app/).
 
 ## Features
 
