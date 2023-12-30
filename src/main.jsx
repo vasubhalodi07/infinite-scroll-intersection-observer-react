@@ -14,9 +14,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );
 
 /*
- Note: After removing the comment tag in React that enforces strict mode,
-       I've noticed an occurrence where the API is being called twice instead 
-       of once. This behavior was not observed when the tag was active 
-       during the development phase. Your feedback on this matter would be 
-       greatly appreciated.
+  Comment StrickMode tag to avoid the unnecessary api calls in useEffect
 */
