@@ -16,21 +16,20 @@ Check out the live project deployed at [Your Deployed URL](#).
 ### Prerequisites
 
 - Node.js installed
-- Basic knowledge of React.js
 
 ### Installation
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/infinite-scroll-react.git
+   git clone https://github.com/vasubhalodi07/infinite-scroll-intersection-observer-react.git
    ```
 
 ### Setup
 
-1. Navigate to the `infinite-scroll-react` directory:
+1. Navigate to the `infinite-scroll-intersection-observer-react` directory:
 
    ```bash
-   cd infinite-scroll-react
+   cd infinite-scroll-intersection-observer-react
    ```
 
 2. Install dependencies:
@@ -41,7 +40,7 @@ Check out the live project deployed at [Your Deployed URL](#).
 
 3. Start the application:
    ```bash
-   npm start
+   npm run dev
    ```
 
 Visit `http://localhost:5173` in your browser to experience the infinite scrolling application.
