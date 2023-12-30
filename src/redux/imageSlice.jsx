@@ -2,16 +2,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 let imageState = {
-  image: [],
-  error: "",
-  loading: false,
+  data: [],
+  page: 1,
+  isInitialCall: true,
   hasMore: true,
-  offset: 0,
+  error: "",
 };
 
-export const fetchImage = createAsyncThunk("image/fetch", async (offset) => {
+export const fetchImage = createAsyncThunk("image/fetch", async (data) => {
   const response = await axios.get(
-    `https://api.slingacademy.com/v1/sample-data/photos?offset=${offset}&limit=20`
+    `https://dummyjson.com/products?limit=${data.limit}&skip=${
+      (data.page - 1) * data.limit
+    }`
   );
   return response.data;
 });
@@ -20,8 +22,8 @@ const imageSlice = createSlice({
   name: "image",
   initialState: imageState,
   reducers: {
-    changeOffset: (state) => {
-      state.offset = state.offset + 20;
+    changePage: (state) => {
+      state.page = state.page + 1;
     },
   },
   extraReducers: (builder) => {
@@ -31,26 +33,20 @@ const imageSlice = createSlice({
       })
       .addCase(fetchImage.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = "";
 
-        if (state.offset > action.payload.total_photos) {
+        state.isInitialCall = false;
+        state.data = [...state.data, ...action.payload.products];
+        if (action.payload.skip > action.payload.total) {
           state.hasMore = false;
         }
-
-        if (state.offset === 0) {
-          state.image = action.payload.photos;
-        } else {
-          state.image = [...state.image, ...action.payload.photos];
-        }
-        state.offset += 20;
       })
       .addCase(fetchImage.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-        state.image = [];
+        state.data = [];
       });
   },
 });
 
 export default imageSlice.reducer;
-export const { changeOffset } = imageSlice.actions;
+export const { changePage } = imageSlice.actions;

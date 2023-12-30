@@ -1,22 +1,48 @@
-import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { changePage, fetchImage } from "../redux/imageSlice";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 const limit = 9;
 
 const Image = () => {
-  const dispatch = useDispatch();
-  const { data, page, isInitialCall, hasMore } = useSelector(
-    (state) => state.imageKey
-  );
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isInitialCall, setIsInitialCall] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
 
   const loadingRef = useRef(null);
 
+  const fetchImage = async () => {
+    try {
+      await axios
+        .get(
+          `https://dummyjson.com/products?limit=${limit}&skip=${
+            (page - 1) * limit
+          }`
+        )
+        .then((response) => {
+          setIsInitialCall(false);
+          setData((prev) => {
+            const newData = [...prev, ...response.data.products];
+            return newData;
+          });
+          if (response.data.skip > response.data.total) {
+            setHasMore(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (err) {
+      setHasMore(false);
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     if (hasMore) {
-      dispatch(fetchImage({ page: page, limit: limit }));
+      fetchImage();
     }
-  }, [dispatch, page, hasMore]);
+  }, [page, hasMore]);
 
   useEffect(() => {
     if (!loadingRef.current) return;
@@ -25,7 +51,7 @@ const Image = () => {
     const loadingObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isInitialCall) {
-          dispatch(changePage());
+          setPage((page) => page + 1);
         }
       },
       {

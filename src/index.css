@@ -14,7 +14,7 @@
 }
 
 .image-details {
-  padding: 20px;
+  padding: 10px 0px;
   background-color: whitesmoke;
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -31,6 +31,7 @@
   -webkit-line-clamp: 1;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-bottom: 10px;
 }
 
 .image-details div:last-child {
@@ -38,8 +39,8 @@
 }
 
 .image-details img {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
 }
 
 .loader {
@@ -51,10 +52,6 @@
   display: flex;
 }
 
-.loader_text {
-  margin-left: 10px;
-}
-
 .spin::before {
   animation: 1.5s linear infinite spinner;
   animation-play-state: inherit;
@@ -62,11 +59,9 @@
   border-bottom-color: #1c87c9;
   border-radius: 50%;
   content: "";
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   position: absolute;
-  /* top: 10%;
-    left: 10%; */
   will-change: transform;
 }
 
@@ -80,7 +75,7 @@
 }
 
 .record {
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
   padding: 10px;
 }
