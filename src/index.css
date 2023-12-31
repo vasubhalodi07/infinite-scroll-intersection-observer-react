@@ -79,3 +79,13 @@
   text-align: center;
   padding: 10px;
 }
+
+.loaded {
+  filter: blur(0px);
+  transition: filter 0.5s linear;
+}
+
+.not-loaded {
+  filter: blur(10px);
+  clip-path: inset(0);
+}

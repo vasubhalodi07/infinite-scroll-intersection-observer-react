@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changePage, fetchImage } from "../redux/imageSlice";
 
@@ -11,6 +11,11 @@ const Image = () => {
   );
 
   const loadingRef = useRef(null);
+
+  const [loadedImages, setLoadedImages] = useState({});
+  const handleImageLoad = (index) => {
+    setLoadedImages((prev) => ({ ...prev, [index]: true }));
+  };
 
   useEffect(() => {
     if (hasMore) {
@@ -48,7 +53,12 @@ const Image = () => {
               <div key={index} className="image-details">
                 <div>{item.title}</div>
                 <div className="image-con">
-                  <img src={item.images[0]} alt="image" />
+                  <img
+                    src={item.images[0]}
+                    alt="image"
+                    onLoad={() => handleImageLoad(index)}
+                    className={loadedImages[index] ? "loaded" : "not-loaded"}
+                  />
                 </div>
               </div>
             ))}
